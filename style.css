@@ -1,0 +1,373 @@
+/* /style.css
+   Intervals game styling aligned to the shared Ear Training Lab template.
+   (Matches button sizing, pulse, panels, analysis cards, modal, next button pulse.)
+*/
+
+:root{
+  --page-bg:#ffffff;
+  --text:#111;
+
+  /* Pulse */
+  --pulseRGBA: rgba(77,163,255,0.28);
+
+  /* Notes */
+  --firstNote:#4da3ff;
+  --secondNote:#34c759;
+
+  /* Next */
+  --nextOrange:#ff8a1f;
+  --nextPulseRGBA: rgba(255,138,31,0.35);
+
+  /* Layout */
+  --text-max: 1000px;
+  --analysis-max: 700px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--page-bg);
+  color:var(--text);
+}
+
+.app{
+  max-width:1260px;
+  margin:8px auto;
+  padding:16px;
+}
+
+.hero{text-align:center;margin:0px 0 12px}
+
+/* Title images (optional, consistent with other games) */
+.app-titleWrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:14px 0 6px;
+}
+.app-titleImg{
+  height:auto;
+  display:block;
+  user-select:none;
+  -webkit-user-drag:none;
+  padding-bottom: 10px;
+}
+.app-titleImgWide{ width:min(500px); }
+.app-titleImgWrapped{ width:min(220px, 55vw); }
+.titleModeWide .app-titleImgWide{ display:block; }
+.titleModeWide .app-titleImgWrapped{ display:none; }
+.titleModeWrapped .app-titleImgWide{ display:none; }
+.titleModeWrapped .app-titleImgWrapped{ display:block; }
+
+.app-subtitle{
+  margin:auto;
+  max-width:1020px;
+  font-size:15px;
+  font-weight:400;
+  opacity:.75;
+  line-height:1.3;
+}
+
+.controlsPanel{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.0);
+  border-radius:16px;
+  padding:0px;
+}
+.controlsPanelActions{margin-top:8px}
+
+.hidden{display:none}
+
+select{
+  height:38px;
+  width:auto;
+  padding:0 10px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.2);
+  background:#fff;
+  cursor:pointer;
+  font-weight:700;
+}
+.compactSelect{max-width:none}
+.inlineControlRowAuto{min-width:unset;width:auto;}
+.compactSelectAuto{ width:auto; max-width:none; inline-size:auto; }
+
+button{
+  height:38px;
+  padding:0 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.2);
+  background:#fff;
+  cursor:pointer;
+  font-weight:800;
+  white-space:nowrap;
+}
+button:active{transform:translateY(1px)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.primary{
+  background:rgb(71, 101, 166);
+  color:#fff;
+  border-color:rgba(0,0,0,.2);
+}
+
+/* Unified pulse (used for "Begin Game" in modal + Replay while active + any other pulsing buttons) */
+@keyframes ringPulse{
+  0%   { box-shadow:0 0 0 0 rgba(0,0,0,0); }
+  55%  { box-shadow:0 0 0 12px var(--ringColor, var(--pulseRGBA)); }
+  100% { box-shadow:0 0 0 0 rgba(0,0,0,0); }
+}
+.pulse{
+  --ringColor: var(--pulseRGBA);
+  animation: ringPulse 1.15s ease-in-out infinite;
+}
+
+.actionsRow{
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.actionsRow > *{ flex: 0 0 auto; }
+.actionsCentered{justify-content:center}
+
+.inlineControl{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.inlineControlRow{min-width:unset; width:auto;}
+.inlineLabel{
+  font-size:12px;
+  font-weight:800;
+  opacity:.75;
+}
+
+/* Answers grid:
+   - Default: 3 rows of 4 (12)
+   - <= 420px: 4 rows of 3
+*/
+.answerGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap:10px;
+  padding: 2px;
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+@media (max-width: 420px){
+  .answerGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 320px){
+  .answerGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.intervalBtn{
+  height:auto;
+  min-height:32px;
+  padding:7px 8px;
+  line-height:1.05;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:3px;
+}
+
+.intervalBtn small{
+  font-size:11px;
+  font-weight:800;
+  opacity:.75;
+}
+
+.intervalBtn.correct{
+  background:#1f9d55;
+  color:#fff;
+  border-color:rgba(0,0,0,.18);
+}
+.intervalBtn.incorrect{
+  background:#d13b3b;
+  color:#fff;
+  border-color:rgba(0,0,0,.18);
+}
+
+/* Next button: orange + same pulse timing */
+.nextReady{
+  --ringColor: var(--nextPulseRGBA);
+  background: var(--nextOrange);
+  color:#fff;
+  border-color: rgba(0,0,0,.15);
+  animation: ringPulse 1.15s ease-in-out infinite;
+}
+
+/* Analysis */
+.analysis{
+  align-items: center;
+  max-width: var(--analysis-max);
+  margin: 10px auto 0;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.0);
+  border-radius:16px;
+  padding:0px;
+}
+
+.analysisGrid{display:grid;gap:10px;margin:0 auto}
+.feedbackGridPitch{
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items:stretch;
+}
+
+.analysisCard{
+  align-items: center;
+  border:1px solid rgba(0,0,0,.2);
+  border-radius:14px;
+  padding:12px;
+  background:#f9f9f9;
+}
+.fixedFeedbackCard{ min-height: 240px; }
+
+.analysisLabel{
+  align-items: center;
+  font-size:12px;
+  opacity:.75;
+  margin-bottom:8px;
+  font-weight:900;
+  letter-spacing:.2px;
+  text-align:center;
+}
+
+.analysisBody{font-size:14px;line-height:1.45;word-break:break-word}
+.scoreBody{font-variant-numeric:tabular-nums}
+
+.feedbackStack{
+  align-items: center;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.scoreCardNarrow{ padding:10px; }
+
+.scoreGrid{ display:grid; gap:8px 10px; }
+.scoreGridVertical{ grid-template-columns: 1fr; gap:8px; }
+.scoreItem{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:10px;
+  padding:8px 10px;
+  border:1px solid rgba(0,0,0,.2);
+  border-radius:12px;
+  background:#fff;
+}
+.scoreK{ font-size:12px; opacity:.75; font-weight:800; letter-spacing:.2px; }
+.scoreV{ font-weight:900; font-variant-numeric:tabular-nums; }
+
+#feedbackOut{ text-align: center; }
+
+.miniLegend{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  opacity:.75;
+  user-select:none;
+}
+.miniLegendInCard{ margin: 0; }
+
+.legendDot{
+  width:10px;height:10px;border-radius:999px;display:inline-block;margin:0 6px 0 0;
+  border:1px solid rgba(0,0,0,.2);
+}
+.legendFirst{background:var(--firstNote)}
+.legendSecond{background:var(--secondNote)}
+
+.mount{ overflow:hidden; }
+.mount svg{ display:block; margin:0 auto; width:100%; height:auto; }
+
+.miniMountInCard{
+  height: 128px;
+  min-height: 128px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero,
+.controlsPanel,
+.endnotes{
+  max-width: var(--text-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:50;
+  overflow:auto; /* keep the card reachable on small screens */
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.modal.hidden{display:none}
+.modalCard{
+  width:min(720px,100%);
+  background:white;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,.1);
+  padding:16px 16px 14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  max-height: calc(100dvh - 36px);
+  overflow:auto;
+  margin:auto;
+}
+.modalTitle{font-size:18px;font-weight:900;margin-bottom:10px;text-align:center}
+.modalBody{
+  font-size:14px;
+  line-height:1.45;
+  opacity:.95;
+  white-space:pre-wrap;
+  text-align:center;
+}
+.modalActions{margin-top:10px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+
+@media (max-width:820px){
+  .feedbackGridPitch{ grid-template-columns: 1fr; }
+  .fixedFeedbackCard{ min-height: 260px; }
+}
+
+@media (max-width:420px){
+  button{padding:0 12px;}
+}
+
+/* Settings modal form (centered) */
+.settingsGrid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-items: center;
+}
+.settingsLabel{
+  font-weight: 900;
+  opacity: .78;
+  font-size: 12px;
+  letter-spacing: .2px;
+  text-align:center;
+}
+.settingsHint{
+  font-size: 13px;
+  opacity: .8;
+  line-height: 1.35;
+  margin-top: 2px;
+  text-align:center;
+}

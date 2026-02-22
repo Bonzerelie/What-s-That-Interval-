@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Identifying Musical Intervals</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <!-- Optional title images (match other games). If you don't have images/, replace with an <h1>. -->
+      <div class="app-titleWrap titleModeWide" id="titleWrap" aria-label="Identifying Musical Intervals">
+        <img class="app-titleImg app-titleImgWide" id="titleImgWide" src="images/title.png" alt="Identifying Musical Intervals" />
+        <img class="app-titleImg app-titleImgWrapped" id="titleImgWrapped" src="images/titlewrapped.png" alt="Identifying Musical Intervals" />
+      </div>
+
+      <p class="app-subtitle" id="subtitle">
+        You’ll hear two notes in sequence (ascending).
+        Choose the interval. Press <strong>R</strong> to replay, and <strong>Space</strong> for next.
+      </p>
+    </header>
+
+    <!-- Row 1 -->
+    <section class="controlsPanel controlsPanelActions" aria-label="top actions">
+      <div class="control">
+        <div class="actionsRow actionsCentered">
+          <button id="restartBtn" type="button">Reset Game</button>
+          <button id="settingsBtn" type="button">Game Settings</button>
+          <button id="infoBtn" type="button">Information</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Row 2 -->
+    <section class="controlsPanel controlsPanelActions" aria-label="bottom actions">
+      <div class="control">
+        <div class="actionsRow actionsCentered">
+          <button id="replayBtn" type="button" disabled>Replay Interval</button>
+          <button id="nextBtn" type="button" disabled>Next</button>
+          <button id="downloadScoreBtn" type="button" disabled>Download Scorecard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Answers -->
+    <section class="controlsPanel controlsPanelActions" aria-label="answers">
+      <div class="control">
+        <div class="answerGrid" id="answerButtons" aria-label="interval answers"></div>
+      </div>
+    </section>
+
+    <!-- Feedback + score -->
+    <section class="analysis" aria-label="feedback">
+      <div class="analysisGrid feedbackGridPitch">
+        <div class="analysisCard fixedFeedbackCard">
+          <div class="analysisLabel">Feedback</div>
+
+          <div class="feedbackStack">
+            <div class="analysisBody" id="feedbackOut" aria-live="polite">
+              Open <strong>Game Settings</strong> to start.
+            </div>
+
+            <div id="keyboardWrap" class="hidden">
+              <div class="miniLegend miniLegendInCard" aria-hidden="true">
+                <span class="legendDot legendFirst"></span> First note
+                <span class="legendDot legendSecond"></span> Second note
+              </div>
+              <div id="miniMount" class="mount miniMount miniMountInCard" aria-label="Mini keyboard"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analysisCard scoreCardNarrow">
+          <div class="analysisLabel">Score Card</div>
+          <div class="analysisBody scoreBody" id="scoreOut">—</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="endnotes"></footer>
+  </div>
+
+  <!-- Settings modal -->
+  <div class="modal hidden" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modalCard" role="document">
+      <div class="modalTitle" id="settingsTitle">What's That Interval</div>
+      <div class="modalBody">
+        In this game you will hear two notes, one after the other in ascending order. The notes will be anywhere from a minor 2nd apart (1 semitone) up to a perfect octave.
+You can select the range of intervals below, and choose whether they all begin from the same root note, or from a random root note.
+Press <strong>R</strong> to replay, and <strong>Space</strong> for 'Next'.
+<div></div>
+        <div class="settingsGrid">
+          <label class="settingsLabel" for="intervalCountSel">Number of intervals included</label>
+          <select id="intervalCountSel" class="compactSelect" aria-label="Intervals included"></select>
+
+          <label class="settingsLabel" for="rootModeSel">Root note mode</label>
+          <select id="rootModeSel" class="compactSelect" aria-label="Root mode">
+            <option value="random" selected>Random root note</option>
+            <option value="fixed">Predetermined root note</option>
+          </select>
+          <label class="settingsLabel" for="rootNoteSel">Predetermined root note</label>
+          <select id="rootNoteSel" class="compactSelect" aria-label="Root note (fixed)" disabled></select>
+        </div>
+      </div>
+      <div class="modalActions">
+        <button id="settingsClose" type="button">Close</button>
+        <button id="settingsApply" type="button" class="primary">Begin Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info modal -->
+  <div class="modal hidden" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modalCard" role="document">
+      <div class="modalTitle" id="modalTitle">Useful Information</div>
+      <div class="modalBody" id="modalBody">
+  Intervals describe the distance between two distinct pitches, and are measured in semitones (half-steps for all you North Americans). The smallest interval is the Perfect Unison, which would be two of the exact same note - think two 'Middle C's' on two pianos. Two notes a single semitone apart have the interval of a Minor 2nd, commonly written 'm2'. An interval of 2 semitones (more commonly called just a 'tone', or a whole-step again for our US and Canadian friends) is called a Major 3rd, or a 'M3' interval.
+  
+  This game plays intervals from a Minor 2nd (m2) up to a Perfect Octave (P8). Learning the sound of different intervals can be beautifully useful as we use intervals to construct other musical elements, such as chords.
+  A nice example of this would be the Major triad, which takes a root note, ie 'C', adds a Major 3rd interval which in this case takes us up to 'E', and then a further Minor 3rd which in this example brings us up to 'G'.
+  
+  Therefore the C Major triad is the notes C, E and G.
+
+</div>
+      <div class="modalActions">
+        <button id="modalClose" type="button" class="primary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
