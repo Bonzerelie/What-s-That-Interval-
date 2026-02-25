@@ -7,8 +7,6 @@
   --page-bg:#ffffff;
   --text:#111;
 
-  
-
   /* Pulse */
   --pulseRGBA: rgba(77,163,255,0.28);
 
@@ -32,29 +30,6 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   background:var(--page-bg);
   color:var(--text);
-}
-
-.raised-surface {
-  /* 1. The Surface */
-  background-color: #ffffff; 
-  
-  /* 2. Curved Corners */
-  border-radius: 16px; 
-  
-  /* 3. The Raised Effect */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); 
-  
-  /* 4. Width and Height (Optimized for mobile) */
-  width: 800px;
-  max-width: 100%; /* Prevents horizontal scrolling on small screens */
-height: auto;
-
-  /* 5. Spacing */
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-top: 0px; /* Fixed: added 'px' */
-  margin: 0 auto; 
 }
 
 .app{
@@ -397,4 +372,3 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none}
   margin-top: 2px;
   text-align:center;
 }
-
