@@ -49,12 +49,13 @@ body{
 }
 .app-titleImg{
   height:auto;
+  max-width: 100%; /* Ensures the image scales down */
   display:block;
   user-select:none;
   -webkit-user-drag:none;
   padding-bottom: 10px;
 }
-.app-titleImgWide{ width:min(500px); }
+.app-titleImgWide{ width: 100%; max-width: 500px; } /* Fixed scaling */
 .app-titleImgWrapped{ width:min(220px, 55vw); }
 .titleModeWide .app-titleImgWide{ display:block; }
 .titleModeWide .app-titleImgWrapped{ display:none; }
@@ -311,11 +312,11 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none}
   inset:0;
   background:rgba(0,0,0,.45);
   display:flex;
-  align-items:center;
+  align-items:flex-start; /* Ensure the modal starts aligning from the top */
   justify-content:center;
-  padding:18px;
+  padding: 100px 18px 18px; /* Force exactly 100px from the top */
   z-index:50;
-  overflow:auto; /* keep the card reachable on small screens */
+  overflow:auto; 
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
@@ -327,9 +328,9 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none}
   border:1px solid rgba(0,0,0,.1);
   padding:16px 16px 14px;
   box-shadow:0 12px 30px rgba(0,0,0,.25);
-  max-height: calc(100dvh - 36px);
+  max-height: calc(100dvh - 136px); /* Adjusted max-height so it doesn't clip off the bottom edge */
   overflow:auto;
-  margin:auto;
+  margin: 0 auto; /* Ensure horizontal centering without vertical pushing */
 }
 .modalTitle{font-size:18px;font-weight:900;margin-bottom:10px;text-align:center}
 .modalBody{
